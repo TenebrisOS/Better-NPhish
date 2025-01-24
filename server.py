@@ -2,6 +2,8 @@ import os
 from os import popen, system
 from time import sleep
 
+port="443"
+
 def requirements(folder):
     from main import check_intr, info2, info, error, ask, nrml, success, blue, cyan, red, green, bgreen, root, yellow
     while True:
@@ -45,12 +47,12 @@ def killer():
 def server():
     from main import check_intr, info2, info, error, ask, nrml, success, blue, cyan, red, green, bgreen, root, yellow
     system("clear")
-    print("\n"+info2+"Initializing PHP server at localhost:80....")
+    print("\n"+info2+"Initializing PHP server at localhost:"+port+"....")
     check_intr()
-    system("cd $HOME/.site && php -S 0.0.0.0:80 > /dev/null 2>&1 &")
+    system("cd $HOME/.site && php -S 0.0.0.0:"+port+" > /dev/null 2>&1 &")
     sleep(2)
     while True:
-        if not system("curl --output /dev/null --silent --head --fail 0.0.0.0:80"):
+        if not system("curl --output /dev/null --silent --head --fail 0.0.0.0:"+port):
             print("\n"+info+"PHP Server has started successfully!")
             break
         else:
