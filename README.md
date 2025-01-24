@@ -12,9 +12,9 @@ Ultimate phishing tool in python. Includes popular websites like facebook, twitt
  - For Termux
     - ```pkg install git python -y```
 ##### Clone the repository
-    - ```git clone https://github.com/TenebrisOS/NPhish-but-better.git```
+   - ```git clone https://github.com/TenebrisOS/NPhish-but-better.git```
 ##### Run the py
-    - ```python3 main.py``` Use sudo if you choose to bind to an admin port (like port 80, depending on your machine and installation)
+   - ```python3 main.py``` Use sudo if you choose to bind to an admin port (like port 80, depending on your machine and installation)
 ## Main Changes
 - Removed the animations for time saving.
 - More optimized python code.
