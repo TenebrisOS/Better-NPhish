@@ -2,7 +2,7 @@ import os
 from os import popen, system
 from time import sleep
 
-port="443"
+port="80"
 
 def requirements(folder):
     from main import check_intr, info2, info, error, ask, nrml, success, blue, cyan, red, green, bgreen, root, yellow
