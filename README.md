@@ -19,7 +19,7 @@ Ultimate phishing tool in python. Includes popular websites like facebook, twitt
 - Removed the animations for time saving.
 - More optimized python code.
 - Easier way of adding custom sites.
-- Toggle for Cloudflare and Ngrok.
+- Toggle for Cloudflare and Ngrok (working on it...).
 ## Credits
 - Main creator credit [CodingSangh](https://github.com/CodingSangh)
 - Main repository [NPhish](https://github.com/CodingSangh/NPhish)
