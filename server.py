@@ -2,15 +2,13 @@ import os
 from os import popen, system
 from time import sleep
 
-port="80"
-
-def requirements(folder):
+def requirements(folder, port):
     from main import check_intr, info2, info, error, ask, nrml, success, blue, cyan, red, green, bgreen, root, yellow
     while True:
         if os.path.exists(root+"/.websites/"+folder):
             if not os.path.isfile(root+"/.websites/"+folder+"/index.html"):
                 system(f"rm -rf {root}/.websites/{folder}")
-                requirements(folder)
+                requirements(folder, port)
             else:
                 system("cp -r $HOME/.websites/"+folder+"/* $HOME/.site")
                 break
@@ -28,7 +26,7 @@ def requirements(folder):
             break
 
     system("mv -f .info.txt $HOME/.site")
-    server()
+    server(port)
 
 def killer():
     if system("pidof php > /dev/null 2>&1")==0:
@@ -44,15 +42,15 @@ def killer():
     if system("pidof unzip > /dev/null 2>&1")==0:
         system("killall unzip")
 
-def server():
+def server(port):
     from main import check_intr, info2, info, error, ask, nrml, success, blue, cyan, red, green, bgreen, root, yellow
     system("clear")
-    print("\n"+info2+"Initializing PHP server at localhost:"+port+"....")
+    print("\n"+info2+"Initializing PHP server at localhost:"+str(port)+"....")
     check_intr()
-    system("cd $HOME/.site && php -S 0.0.0.0:"+port+" > /dev/null 2>&1 &")
+    system("cd $HOME/.site && php -S 0.0.0.0:"+str(port)+" > /dev/null 2>&1 &")
     sleep(2)
     while True:
-        if not system("curl --output /dev/null --silent --head --fail 0.0.0.0:"+port):
+        if not system("curl --output /dev/null --silent --head --fail 0.0.0.0:"+str(port)):
             print("\n"+info+"PHP Server has started successfully!")
             break
         else:

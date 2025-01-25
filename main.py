@@ -29,13 +29,12 @@ info= yellow + '[' + white + '+' + yellow + '] '+ cyan
 info2= green + '[' + white + '•' + green + '] '+ purple
 nrml=white
 
-with open("sites.json", "r") as f:
-    json_files=json.load(f)
-
 sites=[]
-
-for site in json_files:
-    sites.append(site)
+files=os.listdir("sites/")
+for file in files:
+    if file.endswith(".json"):
+        sites.append(file)
+print(sites)
 
 # Website chooser
 def options(list):
@@ -43,9 +42,10 @@ def options(list):
     i=0
     for site in list:
         i+=1
-        print(blue+str(i)+nrml+" "+site)
+        print(blue+str(i)+nrml+" "+site.partition(".")[0].capitalize())
 
     choice=list[int(input("\n"+info2+"#user> "+nrml))-1]
+    print(choice)
     return choice
 
 # socket.setdefaulttimeout(30)
@@ -60,7 +60,7 @@ def check_intr(host="8.8.8.8", port=53, timeout=5):
 
 
 # MAIN FUNCTION
-def main():
+def main(port):
     while True:
         if os.path.exists(root+"/.site"):
             system("rm -rf $HOME/.site && cd $HOME && mkdir .site")
@@ -72,26 +72,35 @@ def main():
         choice=options(sites)
         if choice != None or " " or "":
             try:
-                with open("sites/"+choice+".json") as phs:
+                with open("sites/"+choice) as phs:
                     json_phis=json.load(phs)
                 choicesnbr=[]
                 for choice0 in json_phis:
                     choicesnbr.append(choice0)
-
+                print(json_phis)
                 choices=[]
                 for choice00 in choicesnbr:
                     choices.append(json_phis[choice00])
                 choice1=options(choicesnbr)
-                requirements(folder=json_phis[choice1])
+                print(choice0)
+                print(choicesnbr)
+                print(choice1)
+                print(json_phis[choice1])
+                requirements(folder=json_phis[choice1], port=port)
             except:
                 print("\n"+error+"Wrong input!"+nrml)
-                main()
+                main(port)
         else:
             print("\n"+error+"Wrong input"+nrml)
-            main()
+            main(port)
 
 if __name__ == '__main__':
+    try:
+        port = int(sys.argv[1])
+    except:
+        print("No port mentioned, launch with port argument at the end")
+        exit()
     print("Version: ", version)
     print("Main creator: CodingSangh")
     print("Editor: TenebrisOS")
-    main()
+    main(port)
