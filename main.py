@@ -60,7 +60,7 @@ def check_intr(host="8.8.8.8", port=53, timeout=5):
 
 
 # MAIN FUNCTION
-def main(port):
+def main(port, mode):
     while True:
         if os.path.exists(root+"/.site"):
             system("rm -rf $HOME/.site && cd $HOME && mkdir .site")
@@ -77,7 +77,6 @@ def main(port):
                 choicesnbr=[]
                 for choice0 in json_phis:
                     choicesnbr.append(choice0)
-                print(json_phis)
                 choices=[]
                 for choice00 in choicesnbr:
                     choices.append(json_phis[choice00])
@@ -85,14 +84,14 @@ def main(port):
                 # print(choice0)
                 # print(choicesnbr)
                 # print(choice1)
-                print(json_phis[choice1])
-                requirements(folder=json_phis[choice1], port=port)
+                # print(json_phis[choice1])
+                requirements(folder=json_phis[choice1], port=port, mode=mode)
             except:
                 print("\n"+error+"Wrong input!"+nrml)
-                main(port)
+                main(port, mode)
         else:
             print("\n"+error+"Wrong input"+nrml)
-            main(port)
+            main(port, mode)
 
 if __name__ == '__main__':
     try:
@@ -100,7 +99,18 @@ if __name__ == '__main__':
     except:
         print("No port mentioned, launch with port argument at the end")
         exit()
+    try:
+        args2=str(sys.argv[2])
+        if args2 == "cloudflare":
+            mode=1
+            from ngrock_cloudflare import cld_ngr_install
+            cld_ngr_install()
+        elif args2 != "cloudflare":
+            print("Unknown command! Check out the Github page for usage.")
+            exit()
+    except:
+        mode=0
     print("Version: ", version)
     print("Main creator: CodingSangh")
     print("Editor: TenebrisOS")
-    main(port)
+    main(port, mode)
