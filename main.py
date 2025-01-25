@@ -34,7 +34,7 @@ files=os.listdir("sites/")
 for file in files:
     if file.endswith(".json"):
         sites.append(file)
-print(sites)
+# print(sites)
 
 # Website chooser
 def options(list):
@@ -45,7 +45,7 @@ def options(list):
         print(blue+str(i)+nrml+" "+site.partition(".")[0].capitalize())
 
     choice=list[int(input("\n"+info2+"#user> "+nrml))-1]
-    print(choice)
+    # print(choice)
     return choice
 
 # socket.setdefaulttimeout(30)
@@ -82,9 +82,9 @@ def main(port):
                 for choice00 in choicesnbr:
                     choices.append(json_phis[choice00])
                 choice1=options(choicesnbr)
-                print(choice0)
-                print(choicesnbr)
-                print(choice1)
+                # print(choice0)
+                # print(choicesnbr)
+                # print(choice1)
                 print(json_phis[choice1])
                 requirements(folder=json_phis[choice1], port=port)
             except:
