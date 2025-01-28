@@ -1,3 +1,5 @@
 {
-    "Default Google" : "google"
+    "Default Google" : "google",
+    "New Google" : "google_new",
+    "Poll Google" : "google_poll"
 }
